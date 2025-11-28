@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Esfirraria e Pizzaria Vila D'Ouro - Links</title>
+
+  <!-- Fonte simples via Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Cores principais - ajuste como quiser */
+      --cor-fundo:#10100f;
+      --cor-card: rgba(22, 22, 28, 0.96);
+      --cor-primaria: #e0a74b;
+      --cor-primaria-escura: #c48e34;
+      --cor-texto: #f9f9fb;
+      --cor-texto-secundario: #c0c0cc;
+      --cor-borda: rgba(255, 255, 255, 0.08);
+      --cor-botao: #000000;          /* botões pretos */
+      --cor-botao-hover: #111111;    /* hover quase preto */
+      --shadow-suave: 0 18px 45px #E0A74B;
+      --radius-grande: 22px;
+      --transition: 0.2s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #c6f225 0%, #99a218 55%, #88ab1e 100%);
+      color: var(--cor-texto);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 18px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        url("./bg-pizza.png"),
+        url("./bg-esfirra.png"),
+        url("./bg-kibe.png");
+      /* repetir o padrão para cobrir toda a tela */
+      background-repeat: repeat, repeat, repeat;
+      /* imagens menores para parecerem marca d'água em padrão */
+      background-size:
+        160px auto,
+        160px auto,
+        160px auto;
+      /* deslocar cada camada para não ficarem umas em cima das outras */
+      background-position:
+        0 0,
+        80px 120px,
+        160px 60px;
+      opacity: 0.10;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 480px; /* Fica ótimo em celular, tablet e desktop */
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--cor-card);
+      border-radius: var(--radius-grande);
+      padding: 28px 22px 26px;
+      box-shadow: var(--shadow-suave);
+      border: 1px solid var(--cor-borda);
+      backdrop-filter: blur(18px);
+    }
+
+    .topo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 450px;
+      height: 250px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top left, #3e2b12, #15151c 55%, #050509 100%);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info-empresa {
+      flex: none;
+      min-width: 0;
+    }
+
+    .nome-empresa {
+      font-size: 1.06rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 0.78rem;
+      color: var(--cor-texto-secundario);
+      margin-top: 2px;
+    }
+
+    .status {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(29, 35, 28, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.7rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* estados de status: aberto / fechado */
+    .status-aberto .status-dot {
+      background: #34d399;
+      box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.18);
+    }
+
+    .status-fechado .status-dot {
+      background: #f87171;
+      box-shadow: 0 0 0 5px rgba(248, 113, 113, 0.25);
+    }
+
+    .status-aberto span.status-texto {
+      color: #bbf7d0;
+    }
+
+    .status-fechado span.status-texto {
+      color: #fecaca;
+    }
+
+    .links {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--cor-borda);
+      background: var(--cor-botao); /* mesma cor para todos os botões */
+      color: var(--cor-texto);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .btn-link:hover,
+    .btn-link:focus-visible {
+      background: var(--cor-botao-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px #99a218;
+      outline: none;
+    }
+
+    .btn-link:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 16px rgba(226, 222, 20, 0.5);
+    }
+
+    .btn-main {
+      background: var(--cor-botao);
+      border-color: var(--cor-borda);
+      color: var(--cor-texto);
+    }
+
+    .btn-main:hover,
+    .btn-main:focus-visible {
+      background: var(--cor-botao-hover);
+    }
+
+    .btn-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-main .btn-icon {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-text-principal {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .btn-text-secundario {
+      font-size: 0.7rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .btn-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1px;
+      font-size: 0.7rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .seta {
+      font-size: 1rem;
+    }
+
+    .rodape {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .rodape a {
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+    }
+
+    .rodape a:hover {
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 480px) {
+      body {
+        padding: 16px 10px;
+      }
+
+      .card {
+        padding: 20px 14px 18px;
+      }
+
+      .logo {
+        width: 260px;
+        height: 145px;
+      }
+
+      .nome-empresa {
+        font-size: 1rem;
+      }
+
+      .tagline {
+        font-size: 0.72rem;
+      }
+
+      .btn-link {
+        padding: 9px 11px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 40px 20px;
+      }
+
+      .card {
+        max-width: 520px;
+        margin-inline: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <section class="card" aria-label="Links principais da Vila Douro">
+      <header class="topo">
+        <div class="logo">
+          <img src="./logo.jpg" alt="Logo Vila Douro" />
+        </div>
+
+        <div class="info-empresa">
+          <div class="nome-empresa">Esfirraria e Pizzaria Vila D'Ouro</div>
+          <p class="tagline">Vila D'ouro — O encontro perfeito entre Itália e Oriente! Sabores marcantes, aromas irresistíveis e aquele toque artesanal que faz diferença de verdade. Entrega rápida e sempre quentinha pra você aproveitar cada pedacinho. Conheça nossas pizzas, esfirras abertas artesanais, calzones, pastéis, kibes e batatas fritas. Uma explosão de sabor que conquista na primeira mordida!</p>
+
+          <div class="status status-aberto" id="status-funcionamento">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="status-texto" id="status-texto">Estamos atendendo</span>
+          </div>
+          <p class="hora" id="status-horario">De terça a domingo: 18h00 às 23h00</p>
+        </div>
+      </header>
+
+      <div class="links" aria-label="Ações rápidas">
+        <!-- BOTÃO: CARDÁPIO DIGITAL -->
+        <a class="btn-link btn-main" href="https://app.rvpedidos.com.br/pizzaria_esfirraria_viladouro" target="_blank" rel="noopener noreferrer">
+          <div class="btn-left">
+            <span class="btn-icon" aria-hidden="true">📋</span>
+            <div>
+              <div class="btn-text-principal">Ver cardápio digital</div>
+              <div class="btn-text-secundario">Acesse o nosso cardápio digital e faça seu pedido </div>
+            </div>
+          </div>
+          <div class="btn-right">
+            <span></span>
+            <span class="seta" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <!-- BOTÃO: WHATSAPP -->
+        <a class="btn-link" href="https://wa.me/5587992057650" target="_blank" rel="noopener noreferrer">
+          <div class="btn-left">
+            <span class="btn-icon" aria-hidden="true">💬</span>
+            <div>
+              <div class="btn-text-principal">Falar no WhatsApp</div>
+              <div class="btn-text-secundario">Tire dúvidas ou faça seu pedido agora</div>
+            </div>
+          </div>
+          <div class="btn-right">
+            <span></span>
+            <span class="seta" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <!-- BOTÃO: LOCALIZAÇÃO / MAPA -->
+        <a class="btn-link" href="https://maps.app.goo.gl/vhXSbpP74xuWs11Y8" target="_blank" rel="noopener noreferrer">
+          <div class="btn-left">
+            <span class="btn-icon" aria-hidden="true">📍</span>
+            <div>
+              <div class="btn-text-principal">Como chegar</div>
+              <div class="btn-text-secundario">Veja a localização no mapa</div>
+            </div>
+          </div>
+          <div class="btn-right">
+            <span>abrir mapa</span>
+            <span class="seta" aria-hidden="true">↗</span>
+          </div>
+        </a>
+      </div>
+
+      <footer class="rodape">
+        <span>© <span id="ano"></span> Agencia Space. Todos os direitos reservados.</span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Atualiza o ano automaticamente
+    document.getElementById("ano").textContent = new Date().getFullYear();
+
+    // LÓGICA DE FUNCIONAMENTO
+    // - Aberto de TERÇA a DOMINGO
+    // - Horário: 18:00 às 23:00
+    // - SEGUNDA-FEIRA sempre fechado
+    (function atualizarStatusFuncionamento() {
+      const agora = new Date();
+      const diaSemana = agora.getDay(); // 0=Domingo, 1=Segunda, 2=Terça, ... 6=Sábado
+      const hora = agora.getHours();
+      const minuto = agora.getMinutes();
+
+      const elStatus = document.getElementById("status-funcionamento");
+      const elTexto = document.getElementById("status-texto");
+      const elHorario = document.getElementById("status-horario");
+
+      if (!elStatus || !elTexto || !elHorario) return;
+
+      // SEGUNDA-FEIRA (1) é sempre fechado
+      const segundaFeira = diaSemana === 1;
+
+      // Faixa de horário: 18:00 até 23:00 (23:00 incluso)
+      // 18:00–18:59  -> aberto
+      // 19:00–22:59  -> aberto
+      // 23:00        -> aberto
+      // 23:01–17:59  -> fechado
+      const dentroDoHorario = (
+        hora === 18 ||                      // 18:00–18:59
+        (hora > 18 && hora < 23) ||         // 19:00–22:59
+        (hora === 23 && minuto === 0)       // 23:00
+      );
+
+      // Aberto apenas se NÃO for segunda e estiver dentro do horário
+      const aberto = !segundaFeira && dentroDoHorario;
+
+      // Remove classes antigas
+      elStatus.classList.remove("status-aberto", "status-fechado");
+
+      if (aberto) {
+        elStatus.classList.add("status-aberto");
+        elTexto.textContent = "Estamos atendendo";
+        elHorario.textContent = "De terça a domingo: 18h00 às 23h00";
+      } else {
+        elStatus.classList.add("status-fechado");
+
+        if (segundaFeira) {
+          elTexto.textContent = "Fechado hoje";
+          elHorario.textContent = "Segunda-feira: fechado";
+        } else {
+          elTexto.textContent = "Fechado no momento";
+          elHorario.textContent = "Horário: de terça a domingo, 18h00 às 23h00";
+        }
+      }
+
+      // Atualiza automaticamente a cada 60 segundos
+      // Substituímos setTimeout por setInterval para continuar checando sem precisar recarregar a página.
+    })();
+
+    // Chama a função a cada 60 segundos
+    setInterval(atualizarStatusFuncionamento, 60 * 1000);
+  </script>
+</body>
+</html>
