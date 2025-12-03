@@ -36,7 +36,8 @@
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;   /* esconde só rolagem horizontal */
+      overflow-y: auto;     /* permite rolar para baixo */
       background: radial-gradient(circle at top, #c6f225 0%, #99a218 55%, #88ab1e 100%);
       color: var(--cor-texto);
       min-height: 100vh;
@@ -465,3 +466,4 @@
   </script>
 </body>
 </html>
+``` 
